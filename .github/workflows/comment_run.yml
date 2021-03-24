@@ -3,12 +3,11 @@ name: "Comment run"
 on:
   issue_comment: 
     types: [created, edited]
-  pull_request_review_comment: 
-    types: [created, edited]
     
 jobs:
   comment-run:
     runs-on: ubuntu-latest
+    if: contains(github.event.comment.html_url, '/pull/')
     steps:
     - name: say hello
       if: contains(github.event.comment.body, '/support')   # check the comment if it contains the keywords
